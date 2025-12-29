@@ -9,15 +9,17 @@ import taskRouter from "./routes/task.js";
 import rewardRouter from "./routes/reward.js";
 import eventLogRouter from "./routes/eventLog.js";
 import errorMiddleware from "./middleware/error.middleware.js";
-import cors from 'cors'
+import cors, { CorsOptions } from 'cors'
 
 const server = express();
 
-server.use(cors({
-  origin: "http://localhost:3000", // frontend-ul tău
+const corsOptions: CorsOptions = {
+  origin: "http://localhost:3000",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
-}));
+};
+
+server.use(cors(corsOptions));
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
