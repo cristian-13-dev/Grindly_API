@@ -86,6 +86,13 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
 export const signIn = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
   try {
+    // Validate required fields
+    if (!email || !password) {
+      const error: HttpError = new Error("Email and password are required");
+      error.statusCode = 400;
+      return next(error);
+    }
+
     // Validate JWT_SECRET
     if (!JWT_SECRET) {
       const error = new Error("JWT_SECRET is not configured");
@@ -119,7 +126,12 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
       message: "User signed in successfully",
       data: {
         token,
-        user,
+        user: {
+          _id: user._id,
+          username: user.username,
+          email: user.email,
+          gamification: user.gamification,
+        },
       },
     });
   } catch (error) {
