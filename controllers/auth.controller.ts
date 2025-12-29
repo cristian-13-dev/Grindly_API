@@ -88,7 +88,7 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
     const user = await User.findOne({ email });
 
     if (!user) {
-      const error: HttpError = new Error("User does not exist with this email");
+      const error: HttpError = new Error("Invalid email or password");
       error.statusCode = 404;
       throw error;
     }
