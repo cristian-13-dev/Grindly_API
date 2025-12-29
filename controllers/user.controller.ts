@@ -34,7 +34,7 @@ export const getUser = async (req: Request, res: Response, next: NextFunction) =
     if (!user) {
       const error: CustomError = new Error("User not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.status(200).json({

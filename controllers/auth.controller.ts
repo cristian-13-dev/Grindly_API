@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { JWT_EXPIRES_IN, JWT_SECRET } from "../config/env.js";
+import { JWT_SECRET } from "../config/env.js";
 import type { Request, Response, NextFunction } from "express";
 
 // Custom error interface for HTTP errors
@@ -22,12 +22,17 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
     if (!email || !password) {
       const error: HttpError = new Error("Email and password are required");
       error.statusCode = 400;
-      throw error;
+      await session.abortTransaction();
+      await session.endSession();
+      return next(error);
     }
 
     // Validate JWT_SECRET
     if (!JWT_SECRET) {
-      throw new Error("JWT_SECRET is not configured");
+      const error = new Error("JWT_SECRET is not configured");
+      await session.abortTransaction();
+      await session.endSession();
+      return next(error);
     }
 
     // Check if user exists
@@ -36,7 +41,9 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
     if (existingUser) {
       const error: HttpError = new Error("User already exists with this email");
       error.statusCode = 409;
-      throw error;
+      await session.abortTransaction();
+      await session.endSession();
+      return next(error);
     }
 
     // Hash password
@@ -58,7 +65,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
       JWT_SECRET as string
     );
     await session.commitTransaction();
-    session.endSession();
+    await session.endSession();
 
     res.status(201).json({
       success: true,
@@ -70,7 +77,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
     });
   } catch (error) {
     await session.abortTransaction();
-    session.endSession();
+    await session.endSession();
     next(error);
   }
 };
@@ -81,7 +88,8 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
   try {
     // Validate JWT_SECRET
     if (!JWT_SECRET) {
-      throw new Error("JWT_SECRET is not configured");
+      const error = new Error("JWT_SECRET is not configured");
+      return next(error);
     }
 
     // Check if user exists
@@ -90,15 +98,15 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
     if (!user) {
       const error: HttpError = new Error("Invalid email or password");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
     // Check password
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      const error: HttpError = new Error("Invalid password");
+      const error: HttpError = new Error("Invalid email or password");
       error.statusCode = 401;
-      throw error;
+      return next(error);
     }
 
     const token = jwt.sign(

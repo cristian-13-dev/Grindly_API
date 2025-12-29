@@ -37,7 +37,7 @@ export const getTask = async (req: AuthenticatedRequest, res: Response, next: Ne
     if (!task) {
       const error: CustomError = new Error("Task not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.status(200).json({
@@ -83,7 +83,7 @@ export const updateTask = async (req: AuthenticatedRequest, res: Response, next:
     if (!task) {
       const error: CustomError = new Error("Task not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.status(200).json({
@@ -107,7 +107,7 @@ export const deleteTask = async (req: AuthenticatedRequest, res: Response, next:
     if (!task) {
       const error: CustomError = new Error("Task not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.status(200).json({
@@ -131,7 +131,7 @@ export const completeTask = async (req: AuthenticatedRequest, res: Response, nex
     if (!task) {
       const error: CustomError = new Error("Task not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     task.completed = !task.completed;
@@ -161,7 +161,7 @@ export const getTasksByFrequency = async (req: AuthenticatedRequest, res: Respon
     if (!['once', 'daily', 'weekly', 'monthly'].includes(frequency)) {
       const error: CustomError = new Error("Invalid frequency");
       error.statusCode = 400;
-      throw error;
+      return next(error);
     }
 
     const tasks = await Task.find({ 

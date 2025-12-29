@@ -37,7 +37,7 @@ export const getReward = async (req: AuthenticatedRequest, res: Response, next: 
     if (!reward) {
       const error: CustomError = new Error("Reward not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.status(200).json({
@@ -83,7 +83,7 @@ export const updateReward = async (req: AuthenticatedRequest, res: Response, nex
     if (!reward) {
       const error: CustomError = new Error("Reward not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.status(200).json({
@@ -107,7 +107,7 @@ export const deleteReward = async (req: AuthenticatedRequest, res: Response, nex
     if (!reward) {
       const error: CustomError = new Error("Reward not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.status(200).json({
@@ -131,19 +131,19 @@ export const claimReward = async (req: AuthenticatedRequest, res: Response, next
     if (!reward) {
       const error: CustomError = new Error("Reward not found");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     if (reward.claimed) {
       const error: CustomError = new Error("Reward already claimed");
       error.statusCode = 400;
-      throw error;
+      return next(error);
     }
 
     if (!reward.isActive) {
       const error: CustomError = new Error("Reward is not active");
       error.statusCode = 400;
-      throw error;
+      return next(error);
     }
 
     reward.claimed = true;

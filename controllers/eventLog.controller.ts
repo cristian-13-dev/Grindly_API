@@ -36,7 +36,7 @@ export const getEventsByMetric = async (req: AuthenticatedRequest, res: Response
     if (!['xp', 'coins'].includes(metric)) {
       const error: CustomError = new Error("Invalid metric");
       error.statusCode = 400;
-      throw error;
+      return next(error);
     }
 
     const events = await UserStatEvent.find({ 
