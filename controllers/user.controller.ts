@@ -1,4 +1,7 @@
 import User from "../models/user.model.js";
+import Task from "../models/task.model.js";
+import Reward from "../models/reward.model.js";
+import UserStatEvent from "../models/eventLog.model.js";
 import type { Request, Response, NextFunction } from "express";
 
 // Custom error interface
@@ -104,6 +107,33 @@ export const getUserGamification = async (req: AuthenticatedRequest, res: Respon
         coins: user.gamification?.coins || 0,
         streakCount: user.gamification?.streakCount || 0,
       },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// 🔹 DELETE user (sterge utilizatorul curent si datele asociate)
+export const deleteUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  try {
+    const userId = req.userId;
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Șterge datele asociate în paralel
+    await Promise.all([
+      Task.deleteMany({ user: userId }),
+      Reward.deleteMany({ user: userId }),
+      UserStatEvent.deleteMany({ user: userId }),
+    ]);
+
+    res.status(200).json({
+      success: true,
+      message: "User and associated data deleted successfully",
     });
   } catch (error) {
     next(error);

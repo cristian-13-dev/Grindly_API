@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0ee64ec-d135-42a1-b61b-314466810474" name="Changes" comment="Fix(permission): fix 401 status message when trying to refresh the token" />
+    <list default="true" id="a0ee64ec-d135-42a1-b61b-314466810474" name="Changes" comment="Feat(endpoint): add change password functionality">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,10 +22,7 @@
       &quot;author&quot;: &quot;cristian-13-dev&quot;
     }
   ],
-  &quot;lastFilter&quot;: {
-    &quot;assignee&quot;: &quot;cristian-13-dev&quot;,
-    &quot;author&quot;: &quot;cristian-13-dev&quot;
-  }
+  &quot;lastFilter&quot;: {}
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
@@ -91,6 +90,8 @@
       <workItem from="1767041084681" duration="431000" />
       <workItem from="1767041608298" duration="57000" />
       <workItem from="1767083149249" duration="2347000" />
+      <workItem from="1767111507589" duration="753000" />
+      <workItem from="1767112475643" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="Change invalid email or password error message">
       <option name="closed" value="true" />
@@ -148,11 +149,38 @@
       <option name="project" value="LOCAL" />
       <updated>1767085319540</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat(endpoint) add sign out functionality">
+      <option name="closed" value="true" />
+      <created>1767111858333</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1767111858333</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Feat(endpoint): add change password functionality">
+      <option name="closed" value="true" />
+      <created>1767111967171</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1767111967171</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Change invalid email or password error message" />
@@ -162,6 +190,8 @@
     <MESSAGE value="Fix(dependency): fix missing &quot;cookie-parser&quot; dependency" />
     <MESSAGE value="Fix(permission): fix 41 status message when trying to refresh the token" />
     <MESSAGE value="Fix(permission): fix 401 status message when trying to refresh the token" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix(permission): fix 401 status message when trying to refresh the token" />
+    <MESSAGE value="feat(endpoint) add sign out functionality" />
+    <MESSAGE value="Feat(endpoint): add change password functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat(endpoint): add change password functionality" />
   </component>
 </project>
