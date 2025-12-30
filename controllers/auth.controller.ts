@@ -55,11 +55,19 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
     const refreshToken = jwt.sign({userId: newUser[0]._id.toString()}, JWT_SECRET, {expiresIn: REFRESH_TOKEN_EXP});
 
     // Set cookies
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Set-Cookie', [
-      `access_token=${accessToken}; HttpOnly; Path=/; SameSite=Lax`,
-      `refresh_token=${refreshToken}; HttpOnly; Path=/; SameSite=Lax`
-    ]);
+    res.cookie('access_token', accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    });
+
+    res.cookie('refresh_token', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    });
 
     await session.commitTransaction();
     await session.endSession();
@@ -115,11 +123,19 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
     const refreshToken = jwt.sign({userId: user._id.toString()}, JWT_SECRET, {expiresIn: REFRESH_TOKEN_EXP});
 
     // Set cookies
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Set-Cookie', [
-      `access_token=${accessToken}; HttpOnly; Path=/; SameSite=Lax`,
-      `refresh_token=${refreshToken}; HttpOnly; Path=/; SameSite=Lax`
-    ]);
+    res.cookie('access_token', accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    });
+
+    res.cookie('refresh_token', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    });
 
     return res.status(200).json({
       success: true,
@@ -147,9 +163,12 @@ export const refreshToken = async (req: Request, res: Response) => {
     });
 
     // Setăm cookie-ul nou
-    res.setHeader("Set-Cookie",
-      `access_token=${newAccessToken}; HttpOnly; Path=/; SameSite=Lax`
-    );
+    res.cookie('access_token', newAccessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    });
 
     res.json({success: true});
 

@@ -15,7 +15,7 @@ import cookieParser from 'cookie-parser'
 const server = express();
 
 const corsOptions: CorsOptions = {
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://grindly.onrender.com"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
