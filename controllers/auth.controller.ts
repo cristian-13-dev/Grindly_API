@@ -154,15 +154,12 @@ export const refreshToken = async (req: Request, res: Response) => {
       return res.status(401).json({error: "No refresh token provided"});
     }
 
-    // Verificăm refresh token-ul
     const payload: any = jwt.verify(refreshToken, JWT_SECRET!);
 
-    // Creeăm un nou access token
     const newAccessToken = jwt.sign({userId: payload.userId}, JWT_SECRET!, {
       expiresIn: ACCESS_TOKEN_EXP
     });
 
-    // Setăm cookie-ul nou
     res.cookie('access_token', newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -176,4 +173,25 @@ export const refreshToken = async (req: Request, res: Response) => {
     console.error(err);
     return res.status(403).json({error: "Invalid refresh token"});
   }
+};
+
+export const signOut = async (req: Request, res: Response) => {
+  res.clearCookie('access_token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    path: '/',
+  });
+
+  res.clearCookie('refresh_token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    path: '/',
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: "User signed out successfully"
+  });
 };

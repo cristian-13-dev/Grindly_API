@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0ee64ec-d135-42a1-b61b-314466810474" name="Changes" comment="Fix(permission): fix 41 status message when trying to refresh the token" />
+    <list default="true" id="a0ee64ec-d135-42a1-b61b-314466810474" name="Changes" comment="Fix(permission): fix 401 status message when trying to refresh the token" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,7 +90,7 @@
       <workItem from="1767040012116" duration="294000" />
       <workItem from="1767041084681" duration="431000" />
       <workItem from="1767041608298" duration="57000" />
-      <workItem from="1767083149249" duration="2154000" />
+      <workItem from="1767083149249" duration="2347000" />
     </task>
     <task id="LOCAL-00001" summary="Change invalid email or password error message">
       <option name="closed" value="true" />
@@ -140,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767085299644</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fix(permission): fix 401 status message when trying to refresh the token">
+      <option name="closed" value="true" />
+      <created>1767085319540</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1767085319540</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +161,7 @@
     <MESSAGE value="Feat(cookies): send atuh token in cookies" />
     <MESSAGE value="Fix(dependency): fix missing &quot;cookie-parser&quot; dependency" />
     <MESSAGE value="Fix(permission): fix 41 status message when trying to refresh the token" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix(permission): fix 41 status message when trying to refresh the token" />
+    <MESSAGE value="Fix(permission): fix 401 status message when trying to refresh the token" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix(permission): fix 401 status message when trying to refresh the token" />
   </component>
 </project>
