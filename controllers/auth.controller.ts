@@ -175,6 +175,47 @@ export const refreshToken = async (req: Request, res: Response) => {
   }
 };
 
+export const changePassword = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const {oldPassword, newPassword} = req.body;
+    const userId = req.userId;
+
+    if (!oldPassword || !newPassword) {
+      const error: HttpError = new Error("Old and new passwords are required");
+      error.statusCode = 400;
+      return next(error);
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      const error: HttpError = new Error("User not found");
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+    if (!isPasswordValid) {
+      const error: HttpError = new Error("Invalid old password");
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Password changed successfully"
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const signOut = async (req: Request, res: Response) => {
   res.clearCookie('access_token', {
     httpOnly: true,
