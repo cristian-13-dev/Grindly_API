@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0ee64ec-d135-42a1-b61b-314466810474" name="Changes" comment="Change invalid email or password error message" />
+    <list default="true" id="a0ee64ec-d135-42a1-b61b-314466810474" name="Changes" comment="Feat(cookies): send atuh token in cookies">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,6 +89,10 @@
       <workItem from="1767026760338" duration="1419000" />
       <workItem from="1767032382193" duration="1000" />
       <workItem from="1767038243041" duration="100000" />
+      <workItem from="1767040012116" duration="294000" />
+      <workItem from="1767041084681" duration="431000" />
+      <workItem from="1767041608298" duration="57000" />
+      <workItem from="1767083149249" duration="1538000" />
     </task>
     <task id="LOCAL-00001" summary="Change invalid email or password error message">
       <option name="closed" value="true" />
@@ -96,7 +102,31 @@
       <option name="project" value="LOCAL" />
       <updated>1767038336961</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Change invalid email or password error message and add missing await">
+      <option name="closed" value="true" />
+      <created>1767040259352</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1767040259352</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fix 401 error">
+      <option name="closed" value="true" />
+      <created>1767041651102</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1767041651102</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Feat(cookies): send atuh token in cookies">
+      <option name="closed" value="true" />
+      <created>1767084650434</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1767084650434</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,6 +134,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Change invalid email or password error message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change invalid email or password error message" />
+    <MESSAGE value="Change invalid email or password error message and add missing await" />
+    <MESSAGE value="Fix 401 error" />
+    <MESSAGE value="Feat(cookies): send atuh token in cookies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat(cookies): send atuh token in cookies" />
   </component>
 </project>

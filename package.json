@@ -21,7 +21,9 @@
     "@types/node": "^24.1.0",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
+    "@types/cookie-parser": "^1.4.10",
     "cors": "^2.8.5",
+    "@types/cors": "^2.8.19",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
@@ -31,7 +33,5 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "@types/cookie-parser": "^1.4.10",
-    "@types/cors": "^2.8.19"
   }
 }
