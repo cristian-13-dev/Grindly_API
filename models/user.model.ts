@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema(
       minLength: 8,
     },
 
+    rememberMe: {
+      type: Boolean,
+      required: false
+    },
+
     gamification: {
       xp: { type: Number, default: 0 },
       level: { type: Number, default: 1 },
