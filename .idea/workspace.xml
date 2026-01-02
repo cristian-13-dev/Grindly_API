@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0ee64ec-d135-42a1-b61b-314466810474" name="Changes" comment="feat(endpoint): add delete user functionality">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.model.ts" afterDir="false" />
-    </list>
+    <list default="true" id="a0ee64ec-d135-42a1-b61b-314466810474" name="Changes" comment="feat(schema): Add rememberMe value for checkbox" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +90,7 @@
       <workItem from="1767083149249" duration="2347000" />
       <workItem from="1767111507589" duration="753000" />
       <workItem from="1767112475643" duration="714000" />
-      <workItem from="1767388562340" duration="346000" />
+      <workItem from="1767388562340" duration="469000" />
     </task>
     <task id="LOCAL-00001" summary="Change invalid email or password error message">
       <option name="closed" value="true" />
@@ -175,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767113108104</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat(schema): Add rememberMe value for checkbox">
+      <option name="closed" value="true" />
+      <created>1767388967512</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1767388967512</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +208,7 @@
     <MESSAGE value="feat(endpoint) add sign out functionality" />
     <MESSAGE value="Feat(endpoint): add change password functionality" />
     <MESSAGE value="feat(endpoint): add delete user functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(endpoint): add delete user functionality" />
+    <MESSAGE value="feat(schema): Add rememberMe value for checkbox" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(schema): Add rememberMe value for checkbox" />
   </component>
 </project>

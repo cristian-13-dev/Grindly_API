@@ -69,14 +69,14 @@ export const getCurrentUser = async (req: AuthenticatedRequest, res: Response, n
   }
 };
 
-// 🔹 PATCH update profile (username / email)
+// 🔹 PATCH update profile (username / email / rememberMe)
 export const updateUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
-    const { username, email } = req.body;
+    const { username, email, rememberMe } = req.body;
 
     const user = await User.findByIdAndUpdate(
       req.userId,
-      { username, email },
+      { username, email, rememberMe },
       { new: true, runValidators: true }
     ).select("-password");
 

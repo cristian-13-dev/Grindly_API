@@ -18,7 +18,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
   session.startTransaction();
 
   try {
-    const {email, password} = req.body;
+    const {email, password, rememberMe} = req.body;
 
     if (!email || !password) {
       const error: HttpError = new Error("Email and password are required");
@@ -48,7 +48,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
     const hashedPassword = await bcrypt.hash(password, salt);
     const username = email.split("@")[0];
 
-    const newUser = await User.create([{username, email, password: hashedPassword}], {session});
+    const newUser = await User.create([{username, email, password: hashedPassword, rememberMe}], {session});
 
     // Create tokens
     const accessToken = jwt.sign({userId: newUser[0]._id.toString()}, JWT_SECRET, {expiresIn: ACCESS_TOKEN_EXP});
@@ -60,6 +60,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/',
+      maxAge: rememberMe ? 15 * 60 * 1000 : undefined, // 15 mins if rememberMe is true
     });
 
     res.cookie('refresh_token', refreshToken, {
@@ -67,6 +68,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/',
+      maxAge: rememberMe ? 7 * 24 * 60 * 60 * 1000 : undefined, // 7 days if rememberMe is true
     });
 
     await session.commitTransaction();
@@ -91,7 +93,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
 
 // MARK: SignIn
 export const signIn = async (req: Request, res: Response, next: NextFunction) => {
-  const {email, password} = req.body;
+  const {email, password, rememberMe} = req.body;
 
   try {
     if (!email || !password) {
@@ -118,6 +120,11 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
       return next(error);
     }
 
+    if (rememberMe !== undefined) {
+      user.rememberMe = rememberMe;
+      await user.save();
+    }
+
     // Create tokens
     const accessToken = jwt.sign({userId: user._id.toString()}, JWT_SECRET, {expiresIn: ACCESS_TOKEN_EXP});
     const refreshToken = jwt.sign({userId: user._id.toString()}, JWT_SECRET, {expiresIn: REFRESH_TOKEN_EXP});
@@ -128,6 +135,7 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/',
+      maxAge: rememberMe ? 15 * 60 * 1000 : undefined, // 15 mins if rememberMe is true
     });
 
     res.cookie('refresh_token', refreshToken, {
@@ -135,6 +143,7 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/',
+      maxAge: rememberMe ? 7 * 24 * 60 * 60 * 1000 : undefined, // 7 days if rememberMe is true
     });
 
     return res.status(200).json({
@@ -156,6 +165,11 @@ export const refreshToken = async (req: Request, res: Response) => {
 
     const payload: any = jwt.verify(refreshToken, JWT_SECRET!);
 
+    const user = await User.findById(payload.userId);
+    if (!user) {
+      return res.status(401).json({error: "User not found"});
+    }
+
     const newAccessToken = jwt.sign({userId: payload.userId}, JWT_SECRET!, {
       expiresIn: ACCESS_TOKEN_EXP
     });
@@ -165,6 +179,7 @@ export const refreshToken = async (req: Request, res: Response) => {
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/',
+      maxAge: user.rememberMe ? 15 * 60 * 1000 : undefined,
     });
 
     res.json({success: true});
